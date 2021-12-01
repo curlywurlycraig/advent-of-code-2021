@@ -10,12 +10,13 @@
 
 (defn -main
   []
-  (print (let [file-raw (slurp "./input.txt")
-               file-vals (map parse-int (split-lines file-raw))
-               triples (partition 3 1 file-vals)
-               counts (map (partial apply +) triples)]
+  (print (let [counts (->> (slurp "./input.txt")
+                           (split-lines)
+                           (map parse-int)
+                           (partition 3 1)
+                           (map (partial apply +)))]
            (count
             (filter (partial apply <)
                     (partition 2 1 counts))))))
 
-(-main)
+  (-main)

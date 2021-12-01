@@ -10,10 +10,11 @@
 
 (defn -main
   []
-  (print (let [file-raw (slurp "./input.txt")
-               file-vals (map parse-int (split-lines file-raw))]
+  (print (let [vals (->> (slurp "./input.txt")
+                         (split-lines)
+                         (map parse-int))]
            (count
             (filter (partial apply <)
-                    (partition 2 1 file-vals))))))
+                    (partition 2 1 vals))))))
 
 (-main)
