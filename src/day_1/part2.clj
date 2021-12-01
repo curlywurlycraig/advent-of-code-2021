@@ -1,4 +1,4 @@
-(ns main
+(ns day-1.part2
   (:require [clojure.core :refer [partition]]
             [clojure.string :refer [split-lines]]))
 
@@ -8,9 +8,9 @@
   (. Integer parseInt s))
   
 
-(defn -main
-  []
-  (print (let [counts (->> (slurp "./input.txt")
+(defn main
+  [args]
+  (print (let [counts (->> (slurp "res/day1/input.txt")
                            (split-lines)
                            (map parse-int)
                            (partition 3 1)
@@ -19,4 +19,3 @@
             (filter (partial apply <)
                     (partition 2 1 counts))))))
 
-  (-main)
