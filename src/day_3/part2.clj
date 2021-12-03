@@ -10,10 +10,6 @@
   [n idx]
   (bit-test n (- bit-count idx 1)))
 
-(defn pp-bin
-  [n]
-  (Integer/toString n 2))
-
 (defn most-common
   [ns idx]
   (let [sum-col (->> ns
@@ -42,7 +38,7 @@
           ns))
 
 (defn reduce-bit-find
-  "Given a list of numbers, and a criteria, retain only those numbers that continually pass the bit function."
+  "Given a list of numbers, and a criteria, retain only those numbers that continually pass the criteria."
   [ns crit]
   (reduce (fn [acc curr]
             (if (= 1 (count acc))
