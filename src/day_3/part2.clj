@@ -26,11 +26,11 @@
       (> sum-col half-count) 1
       :else nil)))
 
-(defn most-common-bit-func
+(defn oxygen-criteria
   [ns idx]
   (or (most-common ns idx) 1))
 
-(defn least-common-bit-func
+(defn scrubber-criteria
   [ns idx]
   (or (bit-invert (most-common ns idx)) 0))
 
@@ -42,14 +42,14 @@
           ns))
 
 (defn reduce-bit-find
-  "Given a list of numbers, and a bit finder, retain only those numbers that continually pass the bit function."
-  [ns bit-func]
+  "Given a list of numbers, and a criteria, retain only those numbers that continually pass the bit function."
+  [ns crit]
   (reduce (fn [acc curr]
             (if (= 1 (count acc))
               acc
               (only-with-bit acc
                              curr
-                             (bit-func acc curr))))
+                             (crit acc curr))))
           ns
           (range bit-count)))
 
@@ -58,7 +58,7 @@
   (let [nums (->> (slurp "res/day3/input.txt")
                   split-lines
                   (map #(Integer/parseInt % 2)))
-        oxy (first (reduce-bit-find nums most-common-bit-func))
-        scrubber (first (reduce-bit-find nums least-common-bit-func))]
+        oxy (first (reduce-bit-find nums oxygen-criteria))
+        scrubber (first (reduce-bit-find nums scrubber-criteria))]
     (* oxy scrubber)))
                   
