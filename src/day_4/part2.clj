@@ -73,6 +73,6 @@
        (count-score (last winning) (take (dec n) numbers))
        (let [new-winners (find-winners remaining (take n numbers))]
          (recur new-winners
-                (filter #(not (.contains new-winners %)) remaining)
+                (remove #(.contains new-winners %) remaining)
                 (inc n))))))
 
