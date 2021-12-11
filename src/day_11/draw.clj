@@ -1,4 +1,4 @@
-(ns day-11.part2
+(ns day-11.draw
   (:require [day-11.drawutil :refer [draw-jellies make-image save-image]]
             [clojure.string :refer [split split-lines]]))
 
@@ -62,9 +62,9 @@
        (map-grid-indexed (fn [v _ _] (inc v)))
        update-until-settled))
 
-(let [i (make-image 10 10)]
-  (draw-jellies i (step (step (step (step dumbos)))))
-  (save-image i "jellies.gif"))
+(let [i (make-image 10 10)
+      steps (take 100 (iterate step dumbos))]
+  (doseq [x (range 100)]
+    (draw-jellies i (nth steps x))
+    (save-image i (str "out/jellies/" x ".gif"))))
 
-;; (println (first (first (filter (fn [[_ v]] (apply = (flatten v)))
-;;                (map-indexed (fn [step v] [step v]) (iterate step dumbos))))))
