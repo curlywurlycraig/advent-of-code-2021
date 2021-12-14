@@ -62,11 +62,3 @@
 
 (println (Math/round (double result)))
 
-;; (def result
-;;   (let [freq (frequencies last-result)
-;;         max-freq (apply max (vals freq))
-;;         min-freq (apply min (vals freq))]
-;;     (- max-freq min-freq)))
-  
-;; (println result)
-
